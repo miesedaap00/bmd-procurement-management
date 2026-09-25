@@ -41,26 +41,25 @@
         <a
             href="{{ route('dashboard') }}"
             class="flex items-center gap-3
-                   px-4 py-3
-                   rounded-lg
-                   text-sm font-medium
-                   bg-white/10
-                   hover:bg-white/15
-                   transition"
+                px-4 py-3
+                rounded-lg
+                text-sm font-medium
+                transition
+                {{ request()->routeIs('dashboard') ? 'bg-white/10' : 'hover:bg-white/10' }}"
         >
 
             <span>Dashboard</span>
-
         </a>
 
         <a
-            href="#"
+            href="{{ route('purchase-orders.index') }}"
             class="flex items-center gap-3
                    px-4 py-3
                    rounded-lg
                    text-sm font-medium
                    hover:bg-white/10
-                   transition"
+                   transition
+                   {{ request()->routeIs('purchase-orders.index') ? 'bg-white/10' : 'hover:bg-white/10' }}"
         >
 
             <span>Purchase Order</span>

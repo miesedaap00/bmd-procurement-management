@@ -44,7 +44,7 @@
             </span>
 
             <span class="text-sm font-medium text-[#252525]">
-                Dashboard
+                @yield('breadcrumb')
             </span>
 
         </div>

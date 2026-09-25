@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PurchaseOrderController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -12,6 +13,31 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('/purchase-orders', [
+        PurchaseOrderController::class,
+        'index'
+    ])->name('purchase-orders.index');
+
+    Route::get('/purchase-orders/create', [
+        PurchaseOrderController::class,
+        'create'
+    ])->name('purchase-orders.create');
+
+    Route::post('/purchase-orders', [
+        PurchaseOrderController::class,
+        'store'
+    ])->name('purchase-orders.store');
+
+    Route::patch('/purchase-orders/{purchaseOrder}/status', [
+        PurchaseOrderController::class,
+        'updateStatus'
+    ])->name('purchase-orders.update-status');
+
+    Route::get('/purchase-orders/{purchaseOrder}/download', [
+        PurchaseOrderController::class,
+        'download'
+    ])->name('purchase-orders.download');
 
 });
 

@@ -18,20 +18,16 @@
 
     <div class="min-h-screen">
 
-        {{-- Sidebar --}}
         @include('components.sidebar')
 
-        {{-- Main Content --}}
         <div
             id="main-content"
             class="transition-all duration-300"
             style="margin-left: 16rem;"
         >
 
-            {{-- Navbar --}}
             @include('components.navbar')
 
-            {{-- Page Content --}}
             <main class="p-6">
                 @yield('content')
             </main>

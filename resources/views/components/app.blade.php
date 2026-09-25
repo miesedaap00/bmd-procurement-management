@@ -21,19 +21,15 @@
 
     <div class="min-h-screen">
 
-        {{-- Sidebar --}}
         @include('components.sidebar')
 
-        {{-- Main --}}
         <div
             id="main-content"
             class="ml-64 transition-all duration-300"
         >
 
-            {{-- Navbar --}}
             @include('components.navbar')
 
-            {{-- Content --}}
             <main class="p-6">
 
                 @yield('content')

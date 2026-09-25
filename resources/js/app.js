@@ -1,33 +1,45 @@
 import './bootstrap';
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function () {
 
-    // Sidebar
+
     const sidebarToggle = document.getElementById('sidebar-toggle');
     const sidebar = document.getElementById('sidebar');
     const mainContent = document.getElementById('main-content');
 
     if (sidebarToggle && sidebar && mainContent) {
 
-        sidebarToggle.addEventListener('click', () => {
+        sidebarToggle.addEventListener('click', function () {
 
-            sidebar.classList.toggle('-translate-x-full');
+            const isClosed = sidebar.dataset.closed === 'true';
 
-            mainContent.classList.toggle('ml-64');
-            mainContent.classList.toggle('ml-0');
+            if (isClosed) {
+
+                sidebar.style.transform = 'translateX(0)';
+                mainContent.style.marginLeft = '16rem';
+
+                sidebar.dataset.closed = 'false';
+
+            } else {
+
+                sidebar.style.transform = 'translateX(-100%)';
+                mainContent.style.marginLeft = '0';
+
+                sidebar.dataset.closed = 'true';
+
+            }
 
         });
 
     }
 
 
-    // Profile
     const profileToggle = document.getElementById('profile-toggle');
     const profileMenu = document.getElementById('profile-menu');
 
     if (profileToggle && profileMenu) {
 
-        profileToggle.addEventListener('click', (event) => {
+        profileToggle.addEventListener('click', function (event) {
 
             event.stopPropagation();
 
@@ -36,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
 
-        document.addEventListener('click', (event) => {
+        document.addEventListener('click', function (event) {
 
             if (
                 !profileMenu.contains(event.target) &&

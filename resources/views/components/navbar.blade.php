@@ -7,40 +7,32 @@
            sticky top-0 z-30"
 >
 
-    {{-- LEFT --}}
     <div class="flex items-center gap-4">
 
-        {{-- Hamburger --}}
         <button
             id="sidebar-toggle"
             type="button"
             class="w-10 h-10
-                   flex items-center justify-center
-                   rounded-lg
-                   hover:bg-[#F2F2F2]
-                   transition"
+                flex items-center justify-center
+                rounded-lg
+                hover:bg-[#F2F2F2]
+                transition"
         >
-
             <svg
                 class="w-6 h-6 text-[#252525]"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
             >
-
                 <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
                     d="M4 6h16M4 12h16M4 18h16"
                 />
-
             </svg>
-
         </button>
 
-
-        {{-- Breadcrumb --}}
         <div class="flex items-center gap-2">
 
             <span class="text-sm text-gray-500">
@@ -60,7 +52,6 @@
     </div>
 
 
-    {{-- RIGHT --}}
     <div class="relative">
 
         <button
@@ -73,7 +64,6 @@
                    transition"
         >
 
-            {{-- Avatar --}}
             <div
                 class="w-9 h-9
                        rounded-full
@@ -85,8 +75,6 @@
                 {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
             </div>
 
-
-            {{-- User --}}
             <div class="hidden sm:block text-left">
 
                 <p class="text-sm font-medium text-[#252525]">
@@ -94,13 +82,11 @@
                 </p>
 
                 <p class="text-xs text-gray-500">
-                    User
+                    Admin
                 </p>
 
             </div>
 
-
-            {{-- Arrow --}}
             <svg
                 class="w-4 h-4 text-gray-500"
                 fill="none"
@@ -119,8 +105,6 @@
 
         </button>
 
-
-        {{-- Profile Dropdown --}}
         <div
             id="profile-menu"
             class="hidden absolute right-0 mt-2

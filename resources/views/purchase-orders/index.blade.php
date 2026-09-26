@@ -138,7 +138,7 @@
                                                {{ $purchaseOrder->status === 'pending'
                                                     ? 'text-yellow-700 bg-yellow-50'
                                                     : ($purchaseOrder->status === 'approved'
-                                                        ? 'text-blue-700 bg-blue-50'
+                                                        ? 'text-red-700 bg-red-50'
                                                         : 'text-green-700 bg-green-50') }}"
                                     >
 
@@ -153,7 +153,7 @@
                                             value="approved"
                                             {{ $purchaseOrder->status === 'approved' ? 'selected' : '' }}
                                         >
-                                            Approved
+                                            Revisi
                                         </option>
 
                                         <option

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\PurchaseOrderController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,31 @@ Route::middleware(['auth'])->group(function () {
         PurchaseOrderController::class,
         'download'
     ])->name('purchase-orders.download');
+
+    Route::get('/quotations', [
+        QuotationController::class,
+        'index'
+    ])->name('quotations.index');
+
+    Route::get('/quotations/create', [
+        QuotationController::class,
+        'create'
+    ])->name('quotations.create');
+
+    Route::post('/quotations', [
+        QuotationController::class,
+        'store'
+    ])->name('quotations.store');
+
+    Route::get('/quotations/{quotation}/download/word', [
+        QuotationController::class,
+        'downloadWord'
+    ])->name('quotations.download-word');
+
+    Route::get('/quotations/{quotation}/download/pdf', [
+        QuotationController::class,
+        'downloadPdf'
+    ])->name('quotations.download-pdf');
 
 });
 

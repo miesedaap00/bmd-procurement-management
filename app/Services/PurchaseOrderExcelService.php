@@ -11,7 +11,7 @@ class PurchaseOrderExcelService
 {
     public function generate(PurchaseOrder $purchaseOrder): string
     {
-        $templatePath = base_path('resources/templates/PO_BIMADAYA.xlsx');
+        $templatePath = base_path('resources/templates/PO_BIMADAYA_1.xlsx');
 
         if (!file_exists($templatePath)) {
             throw new \RuntimeException('Template Purchase Order tidak ditemukan.');
@@ -19,7 +19,7 @@ class PurchaseOrderExcelService
 
         $spreadsheet = IOFactory::load($templatePath);
 
-        $worksheet = $spreadsheet->getSheet(1);
+        $worksheet = $spreadsheet->getSheet(0);
 
         $this->fillHeader($worksheet, $purchaseOrder);
         $this->prepareItemRows($worksheet, $purchaseOrder);
@@ -231,12 +231,12 @@ class PurchaseOrderExcelService
         $totalRow = $summaryStartRow + 4;
 
         $worksheet->setCellValue(
-            "B{$contactRow}",
+            "C{$contactRow}",
             $purchaseOrder->contact_person ?? '-'
         );
 
         $worksheet->setCellValue(
-            "B{$termRow}",
+            "C{$termRow}",
             $purchaseOrder->term_of_payment ?? '-'
         );
 

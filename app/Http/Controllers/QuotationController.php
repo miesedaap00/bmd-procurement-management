@@ -3,11 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Quotation;
+use App\Services\QuotationPdfService;
+use App\Services\QuotationWordService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class QuotationController extends Controller
 {
+    private QuotationWordService $wordService;
+
+    private QuotationPdfService $pdfService;
+
+    public function __construct(
+        QuotationWordService $wordService,
+        QuotationPdfService $pdfService
+    ) {
+        $this->wordService = $wordService;
+        $this->pdfService = $pdfService;
+    }
+
     public function index()
     {
         $quotations = Quotation::with('items')
@@ -85,10 +100,14 @@ class QuotationController extends Controller
         $quotation = DB::transaction(function () use ($validated) {
 
             $quotation = Quotation::create([
-                'quotation_number' => $validated['quotation_number'],
-                'client_name' => $validated['client_name'],
-                'client_address' => $validated['client_address'],
-                'quotation_date' => $validated['quotation_date'],
+                'quotation_number' =>
+                    $validated['quotation_number'],
+                'client_name' =>
+                    $validated['client_name'],
+                'client_address' =>
+                    $validated['client_address'],
+                'quotation_date' =>
+                    $validated['quotation_date'],
             ]);
 
             foreach ($validated['items'] as $item) {
@@ -99,8 +118,10 @@ class QuotationController extends Controller
 
                 $quotation->items()->create([
                     'item' => $item['item'],
-                    'specification' => $item['specification'] ?? null,
-                    'brand' => $item['brand'] ?? null,
+                    'specification' =>
+                        $item['specification'] ?? null,
+                    'brand' =>
+                        $item['brand'] ?? null,
                     'quantity' => $quantity,
                     'price' => $price,
                     'total' => $total,
@@ -117,5 +138,47 @@ class QuotationController extends Controller
                 'success',
                 'Quotation berhasil dibuat.'
             );
+    }
+
+    public function downloadWord(
+        Quotation $quotation
+    ) {
+        $quotation->load('items');
+
+        $filePath = $this->wordService->generate(
+            $quotation
+        );
+
+        $safeFileName = preg_replace(
+            '/[^A-Za-z0-9._-]+/',
+            '_',
+            $quotation->quotation_number
+        );
+
+        return Storage::disk('local')->download(
+            $filePath,
+            $safeFileName . '.docx'
+        );
+    }
+
+    public function downloadPdf(
+        Quotation $quotation
+    ) {
+        $quotation->load('items');
+
+        $filePath = $this->pdfService->generate(
+            $quotation
+        );
+
+        $safeFileName = preg_replace(
+            '/[^A-Za-z0-9._-]+/',
+            '_',
+            $quotation->quotation_number
+        );
+
+        return Storage::disk('local')->download(
+            $filePath,
+            $safeFileName . '.pdf'
+        );
     }
 }

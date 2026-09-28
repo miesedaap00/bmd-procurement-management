@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\PurchaseOrderController;
+use App\Http\Controllers\RecordOfGoodsTransferController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -64,6 +65,26 @@ Route::middleware(['auth'])->group(function () {
         QuotationController::class,
         'downloadPdf'
     ])->name('quotations.download-pdf');
+
+    Route::get('/record-of-goods-transfers', [
+        RecordOfGoodsTransferController::class,
+        'index'
+    ])->name('record-of-goods-transfers.index');
+
+    Route::get('/record-of-goods-transfers/create', [
+        RecordOfGoodsTransferController::class,
+        'create'
+    ])->name('record-of-goods-transfers.create');
+
+    Route::post('/record-of-goods-transfers', [
+        RecordOfGoodsTransferController::class,
+        'store'
+    ])->name('record-of-goods-transfers.store');
+
+    Route::get('/record-of-goods-transfers/{recordOfGoodsTransfer}/download', [
+        RecordOfGoodsTransferController::class,
+        'download'
+    ])->name('record-of-goods-transfers.download');
 
 });
 

@@ -150,23 +150,17 @@ class QuotationPdfService
                 throw new \RuntimeException(
                     'PDF tidak ditemukan setelah proses konversi.' .
                     PHP_EOL .
-                    'Expected: ' .
+                    'Exit code: ' .
+                    ($process->getExitCode() ?? '-') .
+                    PHP_EOL .
+                    'Output: ' .
+                    ($output ?: '-') .
+                    PHP_EOL .
+                    'Error: ' .
+                    ($errorOutput ?: '-') .
+                    PHP_EOL .
+                    'Expected PDF: ' .
                     $generatedPdfPath
-                );
-            }
-
-            $finalPdfPath = Storage::disk('local')->path(
-                $pdfPath
-            );
-
-            if (file_exists($finalPdfPath)) {
-                unlink($finalPdfPath);
-            }
-
-            if ($generatedPdfPath !== $finalPdfPath) {
-                rename(
-                    $generatedPdfPath,
-                    $finalPdfPath
                 );
             }
 

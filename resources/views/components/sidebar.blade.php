@@ -67,13 +67,14 @@
         </a>
 
         <a
-            href="#"
+            href="{{ route('quotations.index') }}"
             class="flex items-center gap-3
                    px-4 py-3
                    rounded-lg
                    text-sm font-medium
                    hover:bg-white/10
-                   transition"
+                   transition
+                   {{ request()->routeIs('quotations.*') ? 'bg-white/10' : 'hover:bg-white/10' }}"
         >
 
             <span>Quotation</span>
@@ -81,16 +82,17 @@
         </a>
 
         <a
-            href="#"
+            href="{{ route('record-of-goods-transfers.index') }}"
             class="flex items-center gap-3
                    px-4 py-3
                    rounded-lg
                    text-sm font-medium
                    hover:bg-white/10
-                   transition"
+                   transition
+                   {{ request()->routeIs('record-of-goods-transfers.*') ? 'bg-white/10' : 'hover:bg-white/10' }}"
         >
 
-            <span>Goods Transfer</span>
+            <span>BAST</span>
 
         </a>
 
